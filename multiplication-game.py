@@ -58,6 +58,7 @@ signal.signal(signal.SIGALRM, timeout_handler)
 def new_game():
     '''Starts a new game.'''
     score = 0
+    attempted = 0
     countdown()
     signal.alarm(10)
     try:
@@ -65,8 +66,12 @@ def new_game():
             game = new_round()
             if game:
                 score += 1
+            attempted += 1
     except TimeUpException:
-        print("Time is up! Your final score is:", score)
+        pct_score = "{0:.2f}".format((score/attempted)*100)
+        print("Time is up! You got", score, "correct.")
+        print("You attempted", attempted, "problems.")
+        print("Your final score is " + pct_score + "%.")
 
 if __name__ == "__main__":
     new_game()
