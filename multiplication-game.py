@@ -1,17 +1,17 @@
 # multipication-game.py
 
-from time import *
+import time
 import random
 
 def countdown():
     ''' Counts down to new game'''
     print("Starting in")
     print("3...")
-    sleep(1)
+    time.sleep(1)
     print("2...")
-    sleep(1)
+    time.sleep(1)
     print("1...")
-    sleep(1)
+    time.sleep(1)
     print("GO!")
 
 def generate_new_num(my_min=1, my_max=10):
@@ -55,11 +55,7 @@ def new_game():
         if game:
             score += 1
         counter -= 1
-    
     print("Game over! Your final score is:", score)
 
-
-
 if __name__ == "__main__":
-    #countdown()
     new_game()
