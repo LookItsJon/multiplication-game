@@ -46,24 +46,27 @@ def new_round():
         print("Wrong!")
         return False
 
+class TimeUpException(Exception):
+    '''Exception when timer runs out'''
+    pass
+
 def timeout_handler(signal, frame):
-    raise Exception('Time is up!')
+    '''Raise TimeUpException when timer runs out.'''
+    raise TimeUpException('Time is up!')
 signal.signal(signal.SIGALRM, timeout_handler)
 
 def new_game():
     '''Starts a new game.'''
-    #start = time.time()
     score = 0
     countdown()
     signal.alarm(10)
     try:
-        #while time.time() - start < 20:
         while True:
             game = new_round()
             if game:
                 score += 1
-    except:
-        print("Game over! Your final score is:", score)
+    except TimeUpException:
+        print("Time is up! Your final score is:", score)
 
 if __name__ == "__main__":
     new_game()
