@@ -1,0 +1,1 @@
+This is a simple timed multiplication game to test your speed in multiplying. This is currently a WIP.
