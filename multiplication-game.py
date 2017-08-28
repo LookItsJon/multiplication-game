@@ -18,6 +18,15 @@ def generate_new_num(my_min=1, my_max=10):
     '''Returns a random integer between the two values, with the defaults set at 1 and 10.'''
     return random.randint(my_min, my_max)
 
+def player_input(first, second):
+    '''Gets player answer and checks if it is an integer.'''
+    while True:
+        try:
+            return int(input(": "))
+        except ValueError:
+            print("That's not a number!")
+            print_nums(first, second)
+
 def print_nums(my_first, my_second):
     '''Prints first and second numbers for the player'''
     print(my_first, "x", my_second)
@@ -28,7 +37,7 @@ def new_round():
     second_num = generate_new_num()
     solution = first_num * second_num
     print_nums(first_num, second_num)
-    player_answer = int(input(": "))
+    player_answer = player_input(first_num, second_num)
     if player_answer == solution:
         print("Correct!")
         return True
@@ -37,6 +46,7 @@ def new_round():
         return False
 
 def new_game():
+    '''Starts a new game.'''
     counter = 3
     score = 0
     countdown()
