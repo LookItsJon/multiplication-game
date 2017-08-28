@@ -60,7 +60,7 @@ def new_game():
     score = 0
     attempted = 0
     countdown()
-    signal.alarm(10)
+    signal.alarm(30)
     try:
         while True:
             game = new_round()
