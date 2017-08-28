@@ -2,6 +2,7 @@
 
 import time
 import random
+import signal
 
 def countdown():
     ''' Counts down to new game'''
@@ -45,17 +46,24 @@ def new_round():
         print("Wrong!")
         return False
 
+def timeout_handler(signal, frame):
+    raise Exception('Time is up!')
+signal.signal(signal.SIGALRM, timeout_handler)
+
 def new_game():
     '''Starts a new game.'''
-    counter = 3
+    #start = time.time()
     score = 0
     countdown()
-    while counter > 0:
-        game = new_round()
-        if game:
-            score += 1
-        counter -= 1
-    print("Game over! Your final score is:", score)
+    signal.alarm(10)
+    try:
+        #while time.time() - start < 20:
+        while True:
+            game = new_round()
+            if game:
+                score += 1
+    except:
+        print("Game over! Your final score is:", score)
 
 if __name__ == "__main__":
     new_game()
